@@ -1,0 +1,15 @@
+<h2><%= current_user.username %></h2>
+
+<ul class="recipe-list no-bullets">
+<h3>Favorites</h3>
+
+    <% if @user.recipes.any?  %>
+      <% @user.recipes.each do |recipe| %>
+          <li><%= erb :'recipes/_recipe', locals: { recipe: recipe } %></li>
+          <li><%= erb :'recipes/_form', locals: { recipe: recipe } %></li>
+      <% end %>
+    <% else %>
+      <p>You don't have any recipes in your cookbook yet.</p>
+  <% end %>
+</ul>
+

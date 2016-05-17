@@ -1,0 +1,30 @@
+<%= erb :'_errors', layout: false %>
+
+<form action="/notes" method="post">
+  <fieldset class="form-group">
+    <input type="hidden" name="recipe_id" value="<%= recipe.id %>"
+    <label for="note"></label>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label class="sr-only" for="note"></label>
+    <textarea name="note" id="note" class="form-control" rows="3" cols="40" placeholder="Add your note here..."></textarea>
+  </fieldset>
+
+  <input type="submit" value="add note">
+
+</form>
+
+<% favorite = Favorite.find_by(user_id: current_user.id, recipe_id: recipe.id) %>
+
+<% if favorite.notes %>
+  <ul class="no-bullets">
+    <% favorite.notes.each do |note| %>
+      <hr>
+      <li>
+        <span class="note-text"><%= note.text %><br></span>
+        <span class="note-date"> - <%= note.updated_at.strftime('%D') %></span>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

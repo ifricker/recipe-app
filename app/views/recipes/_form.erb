@@ -1,0 +1,22 @@
+<% if current_user && current_user.recipes.include?(recipe) %>
+  <form action="/favorites" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="hidden" name="recipe_id" value="<%= recipe.id %>"></input>
+
+    <button type="submit">
+      <i class="fa fa-minus"></i>
+    </button>
+  </form>
+<% else %>
+  <form action="/favorites" method="post">
+    <input type="hidden" name="recipe_id" value="<%= recipe.id %>"></input>
+
+    <button type="submit">
+      <i class="fa fa-plus"></i>
+    </button>
+
+  </form>
+<% end %>
+
+
+

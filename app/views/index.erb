@@ -1,0 +1,36 @@
+<% if @recipes && @recipes.length > 0 %>
+  <ul class="main-recipes-list">
+  <% @recipes.each do |recipe| %>
+    <%= erb :'recipes/_recipe', locals: { recipe: recipe } %>
+  <% end %>
+  </ul>
+
+<!-- <a href="/search">More</a> -->
+
+  <% if @first && @last %>
+
+<% if @first.to_i > 0 %>
+  <div class="previous">
+    <form type='get' action="/search">
+    <input type="hidden" name="@first" value="<%= @first.to_i - 12 %>"></input>
+    <input type="hidden" name="@last" value="<%= @last.to_i - 12 %>"></input>
+    <input type="hidden" name="q" value="<%= @user_query %>"></input>
+
+    <input type='submit' value='previous'>
+    </form>
+  </div>
+<% end %>
+
+  <div class="next">
+    <form type='get' action="/search">
+    <input type="hidden" name="@first" value="<%= @first.to_i + 12%>"></input>
+    <input type="hidden" name="@last" value="<%= @last.to_i + 12 %>"></input>
+    <input type="hidden" name="q" value="<%= @user_query %>"></input>
+
+    <input type='submit' value='next'>
+    </form>
+  </div>
+
+  <% end %>
+<% end %>
+

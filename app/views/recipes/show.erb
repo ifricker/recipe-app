@@ -1,0 +1,22 @@
+<h1><%= @recipe.title %></h1>
+
+<hr>
+
+<img src="<%= @recipe.image %>">
+
+<h2>Ingredients</h2>
+<ul class="no-bullets">
+<% @recipe.ingredients_list.each do |ingredient| %>
+  <li><%= ingredient %></li>
+<% end %>
+</ul>
+
+<img src="<%= @recipe.source_icon %>"><br>
+
+<a class="all-links" href="<%= @recipe.url %>"><%= @recipe.source %></a>
+
+<%= erb :'recipes/_form', locals: { recipe: @recipe }, layout: false %>
+
+<% if current_user && current_user.recipes.include?(@recipe) %>
+  <%= erb :'notes/note', locals: { recipe: @recipe }, layout: false %>
+<% end %>
